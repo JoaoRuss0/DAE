@@ -1,10 +1,14 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllStudents",
+                query = "SELECT s FROM Student s ORDER BY s.name"
+        ),
+})
 @Table(name = "students")
 public class Student {
 
