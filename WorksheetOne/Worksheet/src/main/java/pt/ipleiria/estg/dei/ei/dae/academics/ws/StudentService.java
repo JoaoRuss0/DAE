@@ -35,10 +35,10 @@ public class StudentService {
     // Converts an entity Student to a DTO Student class
     private StudentDTO toDTO(Student student) {
         return new StudentDTO(
-                student.getUsername(),
-                student.getPassword(),
-                student.getName(),
-                student.getEmail()
+            student.getUsername(),
+            student.getName(),
+            student.getEmail(),
+            student.getPassword()
         );
     }
 }
