@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NamedQueries({
@@ -9,27 +11,44 @@ import javax.persistence.*;
                 query = "SELECT s FROM Student s ORDER BY s.name"
         ),
 })
-@Table(name = "students")
+@Table(name = "STUDENTS")
 public class Student {
 
     @Id
     private String username;
+
+    @NotNull
     private String name;
-    private String email;
+
+    @NotNull
     private String password;
 
-    public Student() {
+    @NotNull
+    @Email
+    private String email;
 
+    @ManyToOne
+    @JoinColumn(name = "COURSE_CODE")
+    @NotNull
+    private Course course;
+
+    public Student() {
+        this.username = "a";
+        this.name = "a";
+        this.email = "a.a@a.a";
+        this.password = "1234";
+        this.course = new Course();
     }
 
-    public Student(String username, String name, String email, String password) {
+    public Student(String username, String name, String email, String password, Course course) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.course = course;
     }
 
-    /*Getter*/
+    /*Getters*/
     public String getUsername() {
         return username;
     }
@@ -42,8 +61,11 @@ public class Student {
     public String getPassword() {
         return password;
     }
+    public Course getCourse() {
+        return course;
+    }
 
-    /*Setter*/
+    /*Setters*/
     public void setUsername(String username) {
         this.username = username;
     }
@@ -55,5 +77,8 @@ public class Student {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
