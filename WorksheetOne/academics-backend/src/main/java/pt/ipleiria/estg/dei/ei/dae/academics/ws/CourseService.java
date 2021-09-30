@@ -1,11 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.CourseDTO;
-import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.CourseBean;
-import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.StudentBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
-import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;

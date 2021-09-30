@@ -13,14 +13,13 @@ public class CourseBean {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Course create(int courseCode, String courseName){
+    public Course create(int courseCode, String courseName) {
         Course course = new Course(courseCode, courseName);
         entityManager.persist(course);
         return course;
     }
 
-    public Course findCourse(int courseCode)
-    {
+    public Course findCourse(int courseCode) {
         return entityManager.find(Course.class, courseCode);
     }
 
