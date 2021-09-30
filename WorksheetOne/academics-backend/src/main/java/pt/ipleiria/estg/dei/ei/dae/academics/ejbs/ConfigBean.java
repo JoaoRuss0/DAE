@@ -18,6 +18,7 @@ public class ConfigBean {
     @PostConstruct
     public void populateDB() {
         courseBean.create(1, "Course #1");
+        courseBean.create(2, "Course #2");
 
         studentBean.create("JoãoRuss0", "João", "João@gmail.com", "1234", 0);
         studentBean.create("Ana", "Ana", "Ana@gmail.com", "1234", 0);

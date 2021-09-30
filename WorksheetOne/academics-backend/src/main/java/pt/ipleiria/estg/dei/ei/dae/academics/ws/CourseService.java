@@ -38,6 +38,19 @@ public class CourseService {
         return Response.status(Response.Status.CREATED).entity(courseDTO).build();
     }
 
+    @PUT
+    @Path("/{code}")
+    public Response updateCourse(@PathParam("code") int code, CourseDTO courseDTO) {
+        Course course = courseBean.findCourse(code);
+
+        if(course != null)
+        {
+            course = courseBean.update(course, courseDTO.getName());
+            return Response.status(Response.Status.ACCEPTED).entity(toDTO(course)).build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    }
+
     private List<CourseDTO> toDTOs(List<Course> courses) {
         return courses.stream().map(this::toDTO).collect(Collectors.toList());
     }

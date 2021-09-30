@@ -19,7 +19,6 @@ public class StudentBean {
 
         if(course != null)
         {
-            System.out.println("Creating student");
             Student student = new Student(username, name, email, password, course);
             course.addStudent(student);
             entityManager.persist(student);
