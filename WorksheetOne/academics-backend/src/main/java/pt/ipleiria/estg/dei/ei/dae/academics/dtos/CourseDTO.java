@@ -1,10 +1,5 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.dtos;
 
-import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
-import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
-
-import java.util.ArrayList;
-
 public class CourseDTO {
     private int code;
     private String name;

@@ -15,14 +15,18 @@ public class ConfigBean {
     @EJB
     private CourseBean courseBean;
 
+    @EJB
+    private SubjectBean subjectBean;
+
     @PostConstruct
     public void populateDB() {
-        courseBean.create(1, "Course #1");
-        courseBean.create(2, "Course #2");
+        courseBean.create(1, "EI");
+        courseBean.create(2, "EE");
 
-        studentBean.create("JoãoRuss0", "João", "João@gmail.com", "1234", 0);
-        studentBean.create("Ana", "Ana", "Ana@gmail.com", "1234", 0);
-        studentBean.create("Alberto", "Alberto", "Alberto@gmail.com", "1234", 0);
-        studentBean.create("Matilde", "Matilde", "Matilde@gmail.com", "1234", 0);
+        subjectBean.create(1, "Analise", 1, 2010, 2020);
+        subjectBean.create(2, "Algebra", 1, 2010, 2020);
+        subjectBean.create(3, "Programacao I", 1, 2010, 2020);
+        subjectBean.create(4, "Programacao II", 1, 2010, 2020);
+
     }
 }

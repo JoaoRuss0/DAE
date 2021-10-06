@@ -15,13 +15,14 @@ public class StudentBean {
     EntityManager entityManager;
 
     public Student create(String username, String name, String email, String password, int course_code) {
-        Course course = entityManager.find(Course.class, 1);
+        Course course = entityManager.find(Course.class, course_code);
 
         if(course != null)
         {
             Student student = new Student(username, name, email, password, course);
             course.addStudent(student);
             entityManager.persist(student);
+
             return student;
         }
         return null;

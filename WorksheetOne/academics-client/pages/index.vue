@@ -2,21 +2,29 @@
     <div>
         <b-container>
             <b-table striped over :items="students" :fields="fieldsStudents"/>
-        </b-container>
+            <nuxt-link :to="{name: 'students-create'}">
+                <button class="btn btn-dark">Create a New Student</button>
+            </nuxt-link>
 
-        <br>
+            <br>
+            <br>
 
-        <b-container>
             <b-table striped over :items="courses" :fields="fieldsCourses">
                 <template #cell(buttons)="data">
-                    <!--<button type="button" class="btn btn-success" @click="viewCourse(data.item.code)">View</button>
-                    <button type="button" class="btn btn-danger" @click="deleteCourse(data.item.code)">Delete</button>-->
-                    <a class="btn btn-primary" :href="'api/' + data.item.code">View</a>
-                    <a class="btn btn-danger" :href="'api/course/' + data.item.code">Delete</a>
+                    <!--
+                    <button type="button" class="btn btn-success" @click="viewCourse(data.item.code)">View</button>
+                    <button type="button" class="btn btn-danger" @click="deleteCourse(data.item.code)">Delete</button>
+                    -->
+                    <a class="btn btn-primary" :href="'courses/' + data.item.code">View</a>
+                    <a class="btn btn-success" :href="'courses/' + data.item.code + '/update'">Update</a>
+                    <a class="btn btn-danger" @click.prevent="deleteCourse(data.item.code)">Delete</a>
                 </template>
             </b-table>
+            <nuxt-link :to="{name: 'courses-create'}">
+                <button class="btn btn-dark">Create a New Course</button>
+            </nuxt-link>
         </b-container>
-        <nuxt-link to="/create">Create a New Student</nuxt-link>
+        <br>
     </div>
 </template>
 
@@ -24,7 +32,7 @@
 export default {
     data () {
         return {
-            fieldsStudents: ['username', 'name', 'email', 'password'],
+            fieldsStudents: ['username', 'name', 'email', 'password', 'courseCode'],
             students: [],
             fieldsCourses: ['code', 'name', 'buttons'],
             courses: []
@@ -40,10 +48,19 @@ export default {
         })
     },
     methods: {
-        /*viewCourse: function(value)
-        {
-            alert(value)
-        }*/
+        deleteCourse: async function (courseCode) {
+            await this.$axios.$delete('api/courses/' + courseCode)
+
+            this.$axios.$get('/api/courses').then((courses) => {
+                this.courses = []
+                this.courses.push(...courses)
+            })
+
+            this.$axios.$get('/api/students').then((students) => {
+                this.students = []
+                this.students.push(...students)
+            })
+        }
     }
 }
 </script>

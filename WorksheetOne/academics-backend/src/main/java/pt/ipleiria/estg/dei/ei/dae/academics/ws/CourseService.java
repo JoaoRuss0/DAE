@@ -24,6 +24,12 @@ public class CourseService {
         return toDTOs(courseBean.getAllCourses());
     }
 
+    @GET
+    @Path("/{code}")
+    public CourseDTO getCourse(@PathParam("code") int code) {
+        return toDTO(courseBean.findCourse(code));
+    }
+
     @POST
     @Path("/")
     public Response createNewCourse(CourseDTO courseDTO) {
@@ -49,6 +55,18 @@ public class CourseService {
             return Response.status(Response.Status.ACCEPTED).entity(toDTO(course)).build();
         }
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    }
+
+    @DELETE
+    @Path("/{code}")
+    public Response deleteCourse(@PathParam("code") int code) {
+        courseBean.deleteCourse(code);
+
+        if(courseBean.findCourse(code) != null)
+        {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+        return Response.status(Response.Status.ACCEPTED).build();
     }
 
     private List<CourseDTO> toDTOs(List<Course> courses) {
