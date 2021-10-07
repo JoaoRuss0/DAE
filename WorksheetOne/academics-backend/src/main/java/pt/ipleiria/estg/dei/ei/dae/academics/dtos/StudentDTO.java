@@ -5,6 +5,7 @@ import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 import java.io.Serializable;
 
 public class StudentDTO implements Serializable {
+
     private String username;
     private String name;
     private String email;

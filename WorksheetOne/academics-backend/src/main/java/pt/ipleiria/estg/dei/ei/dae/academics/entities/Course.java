@@ -38,7 +38,7 @@ public class Course {
         this.code = code;
         this.name = name;
         this.students = new ArrayList<>();
-        this.students = new ArrayList<>();
+        this.subjects = new LinkedHashSet<>();
     }
 
     public void addStudent(Student student) {
@@ -73,25 +73,27 @@ public class Course {
     public int getCode() {
         return code;
     }
-
     public String getName() {
         return name;
     }
-
     public ArrayList<Student> getStudents() {
         return new ArrayList<>(students);
+    }
+    public LinkedHashSet<Subject> getSubjects() {
+        return new LinkedHashSet<>(subjects);
     }
 
     /*Setters*/
     public void setCode(int code) {
         this.code = code;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public void setStudents(ArrayList<Student> students) {
         this.students = new ArrayList<>(students);
+    }
+    public void setSubjects(LinkedHashSet<Subject> subjects) {
+        this.subjects = new LinkedHashSet<>(subjects);
     }
 }

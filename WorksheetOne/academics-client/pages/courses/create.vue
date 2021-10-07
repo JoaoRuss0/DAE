@@ -15,7 +15,7 @@
                 </b-row>
                 <b-row class="mb-3">
                     <b-col>
-                        <nuxt-link to="/">
+                        <nuxt-link :to="{name: 'courses'}">
                             <button class="btn btn-warning">Return</button>
                         </nuxt-link>
                     </b-col>

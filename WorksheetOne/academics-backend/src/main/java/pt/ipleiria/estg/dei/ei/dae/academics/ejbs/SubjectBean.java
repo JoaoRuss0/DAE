@@ -21,6 +21,10 @@ public class SubjectBean {
         if (course != null) {
             Subject subject = new Subject(id, name, course, courseYear, scholarYear);
             entityManager.persist(subject);
+
+            course.addSubject(subject);
+            entityManager.merge(course);
+
             return subject;
         }
         return null;

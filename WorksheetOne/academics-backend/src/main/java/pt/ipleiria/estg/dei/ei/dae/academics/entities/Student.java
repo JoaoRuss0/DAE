@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
 
@@ -12,21 +11,7 @@ import java.util.LinkedHashSet;
                 query = "SELECT s FROM Student s ORDER BY s.name"
         ),
 })
-@Table(name = "STUDENTS")
-public class Student {
-
-    @Id
-    private String username;
-
-    @NotNull
-    private String name;
-
-    @NotNull
-    private String password;
-
-    @NotNull
-    @Email
-    private String email;
+public class Student extends User {
 
     @ManyToOne
     @JoinColumn(name = "COURSE_CODE")
@@ -41,10 +26,7 @@ public class Student {
     }
 
     public Student(String username, String name, String email, String password, Course course) {
-        this.username = username;
-        this.name = name;
-        this.email = email;
-        this.password = password;
+        super(username, name, password, email);
         this.course = course;
         this.subjects = new LinkedHashSet<>();
     }
@@ -64,44 +46,18 @@ public class Student {
     }
 
     /*Getters*/
-    public String getUsername() {
-        return username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public Course getCourse() {
         return course;
     }
+    public LinkedHashSet<Subject> getSubjects() {
+        return new LinkedHashSet<>(subjects);
+    }
 
     /*Setters*/
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setCourse(Course course) {
         this.course = course;
+    }
+    public void setSubjects(LinkedHashSet<Subject> subjects) {
+        this.subjects = new LinkedHashSet<>(subjects);
     }
 }

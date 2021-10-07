@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.dtos;
 
 public class CourseDTO {
+
     private int code;
     private String name;
 

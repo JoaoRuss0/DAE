@@ -26,8 +26,14 @@ public class CourseService {
 
     @GET
     @Path("/{code}")
-    public CourseDTO getCourse(@PathParam("code") int code) {
-        return toDTO(courseBean.findCourse(code));
+    public Response getCourse(@PathParam("code") int code) {
+        Course course = courseBean.findCourse(code);
+
+        if(course != null)
+        {
+            return Response.status(Response.Status.ACCEPTED).entity(toDTO(course)).build();
+        }
+        return  Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
 
     @POST
@@ -37,8 +43,7 @@ public class CourseService {
 
         Course course = courseBean.findCourse(courseDTO.getCode());
 
-        if(course == null)
-        {
+        if (course == null) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
         return Response.status(Response.Status.CREATED).entity(courseDTO).build();
@@ -49,8 +54,7 @@ public class CourseService {
     public Response updateCourse(@PathParam("code") int code, CourseDTO courseDTO) {
         Course course = courseBean.findCourse(code);
 
-        if(course != null)
-        {
+        if (course != null) {
             course = courseBean.update(course, courseDTO.getName());
             return Response.status(Response.Status.ACCEPTED).entity(toDTO(course)).build();
         }
@@ -62,8 +66,7 @@ public class CourseService {
     public Response deleteCourse(@PathParam("code") int code) {
         courseBean.deleteCourse(code);
 
-        if(courseBean.findCourse(code) != null)
-        {
+        if (courseBean.findCourse(code) != null) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
         return Response.status(Response.Status.ACCEPTED).build();
@@ -75,8 +78,8 @@ public class CourseService {
 
     private CourseDTO toDTO(Course course) {
         return new CourseDTO(
-            course.getCode(),
-            course.getName()
+                course.getCode(),
+                course.getName()
         );
     }
 }
