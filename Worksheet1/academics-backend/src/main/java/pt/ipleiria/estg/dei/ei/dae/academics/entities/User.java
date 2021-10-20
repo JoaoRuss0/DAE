@@ -13,6 +13,9 @@ public class User {
     @Id
     private String username;
 
+    @Version
+    private int version;
+
     @NotNull
     private String name;
 

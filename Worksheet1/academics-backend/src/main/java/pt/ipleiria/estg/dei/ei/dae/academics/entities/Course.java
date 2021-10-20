@@ -21,6 +21,9 @@ public class Course {
     @Id
     private int code;
 
+    @Version
+    private int version;
+
     @NotNull
     private String name;
 

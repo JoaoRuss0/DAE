@@ -22,6 +22,9 @@ public class Subject {
     @Id
     private int code;
 
+    @Version
+    private int version;
+
     @NotNull
     private String name;
 
