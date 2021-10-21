@@ -3,6 +3,8 @@ package pt.ipleiria.estg.dei.ei.dae.academics.ws;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.CourseDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.CourseBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -26,35 +28,30 @@ public class CourseService {
 
     @GET
     @Path("/{code}")
-    public Response getCourse(@PathParam("code") int code) {
+    public Response getCourse(@PathParam("code") int code) throws MyEntityNotFoundException {
         Course course = courseBean.findCourse(code);
 
-        if (course == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+        if(course == null) {
+            throw new MyEntityNotFoundException("Course with code " + code + " does not exist!");
         }
+
         return Response.ok(toDTO(course)).build();
     }
 
     @POST
     @Path("/")
-    public Response createNewCourse(CourseDTO courseDTO) {
-        courseBean.create(courseDTO.getCode(), courseDTO.getName());
-
-        Course course = courseBean.findCourse(courseDTO.getCode());
-
-        if (course == null) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
+    public Response createNewCourse(CourseDTO courseDTO) throws MyEntityExistsException {
+        Course course = courseBean.create(courseDTO.getCode(), courseDTO.getName());
         return Response.status(Response.Status.CREATED).entity(toDTO(course)).build();
     }
 
     @PUT
     @Path("/{code}")
-    public Response updateCourse(@PathParam("code") int code, CourseDTO courseDTO) {
+    public Response updateCourse(@PathParam("code") int code, CourseDTO courseDTO) throws MyEntityNotFoundException {
         Course course = courseBean.findCourse(code);
 
-        if (course == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+        if(course == null) {
+            throw new MyEntityNotFoundException("Course with code " + code + " does not exist!");
         }
 
         course = courseBean.update(course, courseDTO.getName());
@@ -63,7 +60,7 @@ public class CourseService {
 
     @DELETE
     @Path("/{code}")
-    public Response deleteCourse(@PathParam("code") int code) {
+    public Response deleteCourse(@PathParam("code") int code) throws MyEntityNotFoundException {
         courseBean.deleteCourse(code);
 
         if (courseBean.findCourse(code) != null) {

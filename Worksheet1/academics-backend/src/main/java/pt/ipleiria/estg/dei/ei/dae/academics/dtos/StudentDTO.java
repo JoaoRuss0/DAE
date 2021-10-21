@@ -3,6 +3,9 @@ package pt.ipleiria.estg.dei.ei.dae.academics.dtos;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 public class StudentDTO implements Serializable {
 
@@ -12,13 +15,10 @@ public class StudentDTO implements Serializable {
     private String password;
     private int courseCode;
     private String courseName;
+    private List<SubjectDTO> subjects;
 
     public StudentDTO() {
-
-    }
-
-    public StudentDTO(String username) {
-        this.username = username;
+        this.subjects = new ArrayList<>();
     }
 
     public StudentDTO(String username, String name, String email, String password, Course course) {
@@ -28,6 +28,17 @@ public class StudentDTO implements Serializable {
         this.password = password;
         this.courseCode = course.getCode();
         this.courseName = course.getName();
+        this.subjects = new ArrayList<>();
+    }
+
+    public StudentDTO(String username, String name, String email, String password, Course course, List<SubjectDTO> subjects) {
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.courseCode = course.getCode();
+        this.courseName = course.getName();
+        this.subjects = subjects;
     }
 
     /*Getters*/
@@ -49,6 +60,9 @@ public class StudentDTO implements Serializable {
     public String getCourseName() {
         return courseName;
     }
+    public ArrayList<SubjectDTO> getSubjects() {
+        return new ArrayList<>(this.subjects);
+    }
 
     /*Setters*/
     public void setUsername(String username) {
@@ -68,5 +82,8 @@ public class StudentDTO implements Serializable {
     }
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+    public void setSubjects(ArrayList<SubjectDTO> subjects) {
+        this.subjects = new ArrayList<>(subjects);
     }
 }
