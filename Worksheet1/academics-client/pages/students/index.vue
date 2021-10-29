@@ -4,6 +4,9 @@
             <b-table striped over :items="students" :fields="fields">
                 <template #cell(buttons)="data">
                     <a class="btn btn-primary" :href="'students/' + data.item.username">View</a>
+                    <nuxt-link :to="'students/' + data.item.username + '/send-email/'">
+                        <button class="btn btn-success">Send Email</button>
+                    </nuxt-link>
                 </template>
             </b-table>
             <nuxt-link :to="{name: 'students-create'}">
