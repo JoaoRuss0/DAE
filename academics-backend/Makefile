@@ -3,6 +3,7 @@
 ifneq (,$(wildcard ./.env))
     include .env
     export
+    APPLICATION_NAME ?= academics
 endif
 
 up:
@@ -20,16 +21,16 @@ build:
 bash:
 	docker compose exec webserver bash
 
-logs:
+logs: up
 	docker compose logs -f webserver
 
-sql:
+sql: up
 	docker compose exec db psql --username ${DB_USER} --password ${DB_NAME}
 
 ps:
 	docker compose ps
 
 deploy: up build
-	docker compose cp target/academics.war webserver:/opt/jboss/wildfly/standalone/deployments
+	docker compose cp target/${APPLICATION_NAME}.war webserver:/opt/jboss/wildfly/standalone/deployments
 
 monitor: deploy logs
