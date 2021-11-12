@@ -1,5 +1,20 @@
-### Delete a student - run after the previous POST
-DELETE http://localhost:8080/academics/api/students/1234567
-Accept: application/json
-Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJNYXJpbyIsImlzcyI6InF1aWNrc3RhcnQtand0LWlzc3VlciIsImF1ZCI6Imp3dC1hdWRpZW5jZSIsImdyb3VwcyI6WyJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTYzNjA0NTgwMX0.EO0yJmDT4FXI4iEyMiznl-i5iTjMouOArSEC7dADnUgDWAKkHzYbb5d8liZCmkooeMuZx7-9bxpPlih3dSsSbsYvHELjJUet2h9YChYM4uJbno0Ie_PDRtXSRE6LGSItn-LL5jMOyYqCIIC7MUgcydYf5XhbtnfaAq61j66GqPWeDDiyjxC7riQSqH2I7qIiloGvcd4-uah8pnhz9Fb9eY5huJ-8x7kTThOIWwIkLC04L6XCDlJElcBs8v-BT8WmMutVqHthgcVZ96G-BS1AJTeux7mLmFGoWLxbc3Q79GIIUcIQPKAnrZOZOWxS6WMcR2fWLdK7-Ytjcklm0mNtaQ
 ###
+POST http://localhost:8080/academics/api/documents/upload HTTP/1.1
+Authorization: Bearer <replace by the authentication token here>
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="<filename goes here>"
+
+< <full path including filename goes here – do not remove the first ‘<’ sign>
+
+--boundary
+Content-Disposition: form-data; name="username"
+
+<username of the token goes here>
+
+--boundary
+
+###
+GET http://localhost:8080/academics/api/documents/download/1 HTTP/1.1
+Content-Type: application/x-www-form-urlencoded

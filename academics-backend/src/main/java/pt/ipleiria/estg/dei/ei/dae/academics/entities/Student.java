@@ -21,14 +21,19 @@ public class Student extends User {
     @ManyToMany(mappedBy = "students")
     private LinkedHashSet<Subject> subjects;
 
-    public Student() {
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE)
+    private LinkedHashSet<Document> documents;
 
+    public Student() {
+        this.subjects = new LinkedHashSet<>();
+        this.documents = new LinkedHashSet<>();
     }
 
     public Student(String username, String name, String email, String password, Course course) {
         super(username, name, password, email);
         this.course = course;
         this.subjects = new LinkedHashSet<>();
+        this.documents = new LinkedHashSet<>();
     }
 
     public Subject addSubject(Subject subject) {
@@ -45,12 +50,29 @@ public class Student extends User {
         return null;
     }
 
+    public Document addDocument(Document document) {
+        if(documents.add(document)) {
+            return document;
+        }
+        return null;
+    }
+
+    public Document removeDocument(Document document) {
+        if(documents.remove(document)) {
+            return document;
+        }
+        return null;
+    }
+
     /*Getters*/
     public Course getCourse() {
         return course;
     }
     public LinkedHashSet<Subject> getSubjects() {
         return new LinkedHashSet<>(subjects);
+    }
+    public LinkedHashSet<Document> getDocuments() {
+        return documents;
     }
 
     /*Setters*/
@@ -59,5 +81,8 @@ public class Student extends User {
     }
     public void setSubjects(LinkedHashSet<Subject> subjects) {
         this.subjects = new LinkedHashSet<>(subjects);
+    }
+    public void setDocuments(LinkedHashSet<Document> documents) {
+        this.documents = documents;
     }
 }

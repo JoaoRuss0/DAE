@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.academics.ws;
 
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTParser;
+import pt.ipleiria.estg.dei.ei.dae.academics.dtos.AuthDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.JwtBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.UserBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.User;
@@ -28,10 +29,10 @@ public class LoginService {
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response authenticateUser(@FormParam("username") String username, @FormParam("password") String password) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response authenticateUser(AuthDTO authDTO) {
         try {
-            User user = userBean.authenticate(username, password);
+            User user = userBean.authenticate(authDTO.getUsername(), authDTO.getPassword());
 
             if (user != null) {
                 if (user.getUsername() != null) {
