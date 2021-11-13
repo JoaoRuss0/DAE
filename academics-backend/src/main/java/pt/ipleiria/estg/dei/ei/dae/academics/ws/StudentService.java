@@ -1,10 +1,12 @@
 package pt.ipleiria.estg.dei.ei.dae.academics.ws;
 
+import pt.ipleiria.estg.dei.ei.dae.academics.dtos.DocumentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.EmailDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.StudentDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.dtos.SubjectDTO;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.EmailBean;
 import pt.ipleiria.estg.dei.ei.dae.academics.ejbs.StudentBean;
+import pt.ipleiria.estg.dei.ei.dae.academics.entities.Document;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Student;
 import pt.ipleiria.estg.dei.ei.dae.academics.entities.Subject;
 import pt.ipleiria.estg.dei.ei.dae.academics.exceptions.MyConstraintViolationException;
@@ -112,15 +114,10 @@ public class StudentService {
                 student.getEmail(),
                 student.getPassword(),
                 student.getCourse(),
-                toDTOsSubjects(student.getSubjects())
+                toDTOsSubjects(student.getSubjects()),
+                toDTOsDocuments(student.getDocuments())
         );
     }
-
-    /*
-    private List<StudentDTO> toDTOssStudents(List<Student> students) {
-        return students.stream().map(this::toDTOStudent).collect(Collectors.toList());
-    }
-    */
 
     private List<SubjectDTO> toDTOsSubjects(LinkedHashSet<Subject> subjects) {
         return subjects.stream().map(this::toDTOSubject).collect(Collectors.toList());
@@ -134,5 +131,16 @@ public class StudentService {
                 subject.getCourseYear(),
                 subject.getScholarYear()
         );
+    }
+
+    private List<DocumentDTO> toDTOsDocuments(LinkedHashSet<Document> documents) {
+        return documents.stream().map(this::toDTODocument).collect(Collectors.toList());
+    }
+
+    private DocumentDTO toDTODocument(Document document) {
+        return new DocumentDTO(
+                document.getId(),
+                document.getFilepath(),
+                document.getFilename());
     }
 }

@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -22,6 +23,8 @@ public class DocumentBean {
     public void create(String username, String filepath, String filename) throws MyEntityNotFoundException {
         Student student = studentBean.findStudent(username);
         Document document = new Document(filepath, filename, student);
+        student.addDocument(document);
+        entityManager.persist(document);
     }
 
     public Document findDocument(int id) throws MyEntityNotFoundException {
@@ -34,6 +37,8 @@ public class DocumentBean {
     }
 
     public List<Document> getStudentDocuments(String username){
-        return entityManager.createNamedQuery("getStudentDocuments", Document.class).getResultList();
+        Query query = entityManager.createNamedQuery("getStudentDocuments", Document.class);
+        query.setParameter("username", username);
+        return query.getResultList();
     }
 }

@@ -4,7 +4,6 @@ import pt.ipleiria.estg.dei.ei.dae.academics.entities.Course;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 public class StudentDTO implements Serializable {
@@ -16,9 +15,11 @@ public class StudentDTO implements Serializable {
     private int courseCode;
     private String courseName;
     private List<SubjectDTO> subjects;
+    private List<DocumentDTO> documents;
 
     public StudentDTO() {
         this.subjects = new ArrayList<>();
+        this.documents = new ArrayList<>();
     }
 
     public StudentDTO(String username, String name, String email, String password, Course course) {
@@ -31,7 +32,7 @@ public class StudentDTO implements Serializable {
         this.subjects = new ArrayList<>();
     }
 
-    public StudentDTO(String username, String name, String email, String password, Course course, List<SubjectDTO> subjects) {
+    public StudentDTO(String username, String name, String email, String password, Course course, List<SubjectDTO> subjects, List<DocumentDTO> documents) {
         this.username = username;
         this.name = name;
         this.email = email;
@@ -39,6 +40,7 @@ public class StudentDTO implements Serializable {
         this.courseCode = course.getCode();
         this.courseName = course.getName();
         this.subjects = subjects;
+        this.documents = documents;
     }
 
     /*Getters*/
@@ -63,6 +65,9 @@ public class StudentDTO implements Serializable {
     public ArrayList<SubjectDTO> getSubjects() {
         return new ArrayList<>(this.subjects);
     }
+    public ArrayList<DocumentDTO> getDocuments() {
+        return new ArrayList<>(this.documents);
+    }
 
     /*Setters*/
     public void setUsername(String username) {
@@ -85,5 +90,8 @@ public class StudentDTO implements Serializable {
     }
     public void setSubjects(ArrayList<SubjectDTO> subjects) {
         this.subjects = new ArrayList<>(subjects);
+    }
+    public void setDocuments(ArrayList<DocumentDTO> documents) {
+        this.documents = new ArrayList<>(documents);
     }
 }

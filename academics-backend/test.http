@@ -1,17 +1,17 @@
 ###
 POST http://localhost:8080/academics/api/documents/upload HTTP/1.1
-Authorization: Bearer <replace by the authentication token here>
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJNYXJpbyIsImlzcyI6InF1aWNrc3RhcnQtand0LWlzc3VlciIsImF1ZCI6Imp3dC1hdWRpZW5jZSIsImdyb3VwcyI6WyJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTYzNjgzNjAzNH0.Gu-SlItlEp1iIAk0mphAaDWVJD9djf6U6IDbNEt5LRbeXWJARD4mKPyvof9KIcEI9fBBBEorXKh5kOuN6zOSl-AjMpRq5Gu2yZkHXGJOc5-tHDJoPsPB_qVthtGiX06hxXNzfeiLzmnpUO5dLAB1LjLlOhH_COgYzXrGFgTSYATDNFxeqsdtfUpgEpUDMmnWlDnbA7eafz1KBRZ7Kfd_ffVA7-5iLAqKmwp4OAtXET42cVUWg6GFqlWOvrSqh-eUclmg_27lZFXjZD5DTGRX45KoigpFarCCceja2ePYVFhMXpm0EhHoy-PqfSNxP4qxiInzrZ84KW9q0gVkZhqMtQ
 Content-Type: multipart/form-data; boundary=boundary
 
 --boundary
-Content-Disposition: form-data; name="file"; filename="<filename goes here>"
+Content-Disposition: form-data; name="file"; filename="Makefile"
 
-< <full path including filename goes here – do not remove the first ‘<’ sign>
+< Makefile
 
 --boundary
 Content-Disposition: form-data; name="username"
 
-<username of the token goes here>
+Joao
 
 --boundary
 

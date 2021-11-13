@@ -43,6 +43,14 @@
                         </nuxt-link>
                     </b-col>
                 </b-row>
+
+                <h4>Documents</h4>
+                <b-table v-if="documents.length" striped over :items="documents" :fields="documentsFields">
+                    <template v-slot:cell(actions)="row">
+                        <b-btn class="btn btn link" @click.prevent="download(row.item)" target="_blank">Download</b-btn>
+                    </template>
+                </b-table>
+                <p v-else>No documents.</p>
             </div>
         </b-container>
     </div>
@@ -53,13 +61,39 @@ export default {
     data () {
         return {
             student: null,
-            subjectFields: ['code', 'name', 'courseCode', 'courseYear', 'scholarYear']
+            subjectFields: ['code', 'name', 'courseCode', 'courseYear', 'scholarYear'],
+            documentsFields: [ 'filename', 'actions' ]
         }
     },
     created () {
-        this.$axios.$get('api/students/' + this.$route.params.username).then((student) => {
+        this.$axios.$get('api/students/' + this.username).then((student) => {
             this.student = student
         })
     },
+    computed: {
+        username() {
+            return this.$route.params.username
+        },
+        subjects() {
+            return this.student.subjects || []
+        },
+        documents() {
+            return this.student.documents || []
+        },
+    },
+    methods: {
+        download(fileToDownload) {
+            const documentId = fileToDownload.id
+
+            this.$axios.$get('/api/documents/download/' + documentId, {responseType: 'arraybuffer'}).then(file => {
+                const url = window.URL.createObjectURL(new Blob([file]))
+                const link = document.createElement('a')
+                link.href = url
+                link.setAttribute('download', fileToDownload.filename)
+                document.body.appendChild(link)
+                link.click()
+            })
+        }
+    }
 }
 </script>
