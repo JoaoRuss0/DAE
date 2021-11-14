@@ -1,18 +1,17 @@
 <template>
-	<form @submit.prevent="upload">
-		<!-- Styled -->
-		<b-form-file
-			v-model="file"
-			:state="hasFile"
-			placeholder="Choose a file or drop it here..."
-			drop-placeholder="Drop file here..."
-		></b-form-file>
-		<div class="mt-3">Selected file: {{ file ? file.name : "" }}</div>
-		<nuxt-link class="btn btn-link" :to="`/students/${this.username}`"
-			>Back</nuxt-link
-		>
-		<b-button type="submit" :disabled="!hasFile">Upload</b-button>
-	</form>
+    <b-container>
+        <form @submit.prevent="upload">
+            <b-form-file
+                v-model="file"
+                :state="hasFile"
+                placeholder="Choose a file or drop it here..."
+                drop-placeholder="Drop file here..."
+            ></b-form-file>
+            <div class="mt-3">Selected file: {{ file ? file.name : "" }}</div>
+            <nuxt-link class="btn btn-link" :to="`/students/${this.username}`">Back</nuxt-link>
+            <b-button type="submit" :disabled="!hasFile">Upload</b-button>
+        </form>
+    </b-container>
 </template>
 <script>
 export default {
