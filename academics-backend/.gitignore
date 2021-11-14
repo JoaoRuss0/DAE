@@ -1,0 +1,11 @@
+.env
+received-emails/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+ 
+# Maven
+log/
+target/

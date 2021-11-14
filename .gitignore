@@ -1,5 +1,0 @@
-.env
-.idea/
-target/
-docker-wildfly-postgres/
-received-emails/
