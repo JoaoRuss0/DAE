@@ -71,14 +71,15 @@ export default {
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {},
 
-    ssr: false, // Disable Server Side rendering
+    // Disable Server Side rendering
+    ssr: false,
 
     // Auth module configuration (https://auth.nuxtjs.org/)
     auth: {
         redirect: {
-            login: '/auth/login',
-            logout: '/',
-            home: '/'
+            login: "/auth/login",
+            logout: "/",
+            home: "/"
         },
         watchLoggedIn: true,
         strategies: {

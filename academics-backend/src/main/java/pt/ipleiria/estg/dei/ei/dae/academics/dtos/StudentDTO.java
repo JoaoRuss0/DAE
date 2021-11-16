@@ -30,6 +30,7 @@ public class StudentDTO implements Serializable {
         this.courseCode = course.getCode();
         this.courseName = course.getName();
         this.subjects = new ArrayList<>();
+        this.documents = new ArrayList<>();
     }
 
     public StudentDTO(String username, String name, String email, String password, Course course, List<SubjectDTO> subjects, List<DocumentDTO> documents) {

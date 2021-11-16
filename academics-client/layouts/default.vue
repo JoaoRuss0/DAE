@@ -6,7 +6,7 @@
 			<b-collapse id="nav-collapse" is-nav>
 				<b-navbar-nav>
 					<li class="nav-item">
-						<nuxt-link class="nav-link" to="students"
+						<nuxt-link class="nav-link" to="/students"
 							>Students</nuxt-link
 						>
 					</li>

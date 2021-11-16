@@ -44,11 +44,8 @@ export default {
 			});
 			promise.then(() => {
 				this.$toast.success("You are logged in!").goAway(3000);
-				// check if the user $auth.user object is set
-				console.log(this.$auth.user);
-				// TODO redirect based on the user role
-				// eg:
-				if (this.$auth.user.groups.includes("Teacher")) {
+
+				if (this.$auth.user.groups.includes("Teacher") || this.$auth.user.groups.includes("Administrator")) {
 					this.$router.push("/students");
 				} else if (this.$auth.user.groups.includes("Student")) {
 					this.$router.push("/students/" + this.username);
